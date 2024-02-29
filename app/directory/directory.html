@@ -1,0 +1,116 @@
+
+<!-- this can be improved by extracting the list as a reusable component that takes parameters , the same goes for the modal -->
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-lg-4">
+            <h3>Companies :</h3>
+            <div class="custom-search-input">
+                <div class="input-group col-md-4">
+                    <input type="text" class="form-control input-lg" placeholder="Search companies"
+                        ng-model="companySearch" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                        </button>
+                    </span>
+                </div>
+                <div class="list-container" style="height: 300px; overflow-y: hidden;">
+                    <ul class="list-group" style="overflow-y: auto;">
+                        <li class="list-group-item" ng-repeat="company in companies | filter:companySearch">
+                            <strong>Name:</strong> {{
+                            company.name}}<br>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <h3>Departments :</h3>
+            <div class="custom-search-input">
+                <div class="input-group col-md-4">
+                    <input type="text" class="form-control input-lg" placeholder="Search departments"
+                        ng-model="departmentsSearch" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                        </button>
+                    </span>
+                </div>
+                <div class="list-container" style="height: 300px; overflow-y: hidden;">
+                    <ul class="list-group" style="overflow-y: auto;">
+                        <li class="list-group-item" ng-repeat="department in departments | filter:departmentsSearch">
+                            <strong>Name:</strong> {{
+                            department.name}}<br>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-4">
+            <h3>Employees :</h3>
+            <div class="custom-search-input">
+                <div class="input-group col-md-4">
+                    <input type="text" class="form-control input-lg" placeholder="Search employees"
+                        ng-model="employeeSearch" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button" ng-click="toggleModal()">
+                            new
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-plus" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                            </svg>
+                        </button>
+                    </span>
+                </div>
+                <ul class="list-group" style="height: 200px; overflow-y: scroll;">
+                    <li ng-click="prepareDelete($index)" class="list-group-item"
+                        ng-class="{ 'selected': idToDelete === $index }"
+                        ng-repeat="employee in employees | filter:employeeSearch track by $index">
+                        {{ employee.name }} - {{ employee.position }}
+                    </li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-danger" ng-show="showDelete" ng-click="delete()">delete</button>
+        </div>
+    </div>
+</div>
+<div class="modal custom-modal" tabindex="-1" id="addNewEmp" role="dialog" ng-class="{ 'show': showModal }">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add new Employee</h5>
+                <button type="button" class="close" ng-click="toggleModal()">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="employeeName">Name</label>
+                        <input type="text" class="form-control" id="employeeName" ng-model="newEmployee.name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="employeePosition">Position</label>
+                        <input type="text" class="form-control" id="employeePosition" ng-model="newEmployee.position"
+                            required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="addEmployee()">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

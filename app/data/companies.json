@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Acme Corporation",
+    "industry": "Technology"
+  },
+  {
+    "id": 2,
+    "name": "Global Widgets Inc.",
+    "industry": "Manufacturing"
+  },
+  {
+    "id": 3,
+    "name": "Innovative Solutions Co.",
+    "industry": "Software"
+  },
+  {
+    "id": 4,
+    "name": "Bright Ideas Group",
+    "industry": "Consulting"
+  },
+  {
+    "id": 5,
+    "name": "Dynamic Ventures Ltd.",
+    "industry": "Finance"
+  }
+]
